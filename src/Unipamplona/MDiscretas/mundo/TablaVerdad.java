@@ -163,7 +163,7 @@ public class TablaVerdad {
                     case SYMBOL_UNION:
                         temp1 = pilaSalida.pop();
                         temp2 = pilaSalida.pop();
-                        pilaSalida.add("( " + temp1 + " v " + temp2 + " ) ");
+                        pilaSalida.add("( " + temp2 + " v " + temp1 + " ) ");
                         matrizResultado[0][n_conjuntos] = (String) pilaSalida.peek();
                         var1 = temp1.toString();
                         var2 = temp2.toString();
@@ -197,7 +197,7 @@ public class TablaVerdad {
                     case SYMBOL_INTERSECCION:
                         temp1 = pilaSalida.pop();
                         temp2 = pilaSalida.pop();
-                        pilaSalida.add("( " + temp1 + " ^ " + temp2 + " ) ");
+                        pilaSalida.add("( " + temp2 + " ^ " + temp1 + " ) ");
                         matrizResultado[0][n_conjuntos] = (String) pilaSalida.peek();
 
                         var1 = temp1.toString();
@@ -257,10 +257,10 @@ public class TablaVerdad {
                     case SYMBOL_DIFERENCIA:
                         temp1 = pilaSalida.pop();
                         temp3 = pilaSalida.pop();
-                        temp2 = ("( " + "¬ " + temp3 + " )");
+                        temp2 = ("( " + "¬ " + temp1 + " )");
                         matrizResultado[0][n_conjuntos] = (String) temp2;
                         n_conjuntos++;
-                        pilaSalida.add("( " + temp1 + " ^ " + temp2 + " ) ");
+                        pilaSalida.add("( " + temp3 + " ^ " + temp2 + " ) ");
                         matrizResultado[0][n_conjuntos] = (String) pilaSalida.peek();
                         var1 = temp1.toString();
                         var2 = temp2.toString();
@@ -270,10 +270,10 @@ public class TablaVerdad {
                             if (matrizResultado[0][h].equals(var2)) {
                                 aux = h;
                             }
-                            if (matrizResultado[0][h].equals(var1)) {
+                            if (matrizResultado[0][h].equals(var3)) {
                                 f = h;
                             }
-                            if (matrizResultado[0][h].equals(var3)) {
+                            if (matrizResultado[0][h].equals(var1)) {
                                 k = h;
                             }
                         }
@@ -287,11 +287,11 @@ public class TablaVerdad {
                             } else {
                                 matrizResultado[j][aux] = "F";
                             }
-                            if (matrizResultado[j][aux].equals("F")) {
-                                p = false;
+                            if (matrizResultado[j][k].equals("F")) {
+                                q = false;
                             }
                             if (matrizResultado[j][f].equals("F")) {
-                                q = false;
+                                p = false;
                             }
                             if (p && !q) {
                                 matrizResultado[j][n_conjuntos] = "V";
@@ -305,16 +305,16 @@ public class TablaVerdad {
                     case SYMBOL_DIFERENCIA_SIMETRICA:
                         temp1 = pilaSalida.pop();
                         temp2 = pilaSalida.pop();
-                        temp3 = ("( " + temp1 + " v " + temp2 + " ) ");
-                        temp4 = ("( " + temp1 + " ^ " + temp2 + " ) ");
-                        temp5 = ("¬ " + "( " + temp1 + " ^ " + temp2 + " ) ");
+                        temp3 = ("( " + temp2 + " v " + temp1 + " ) ");
+                        temp4 = ("( " + temp2 + " ^ " + temp1 + " ) ");
+                        temp5 = ("¬ " + "( " + temp2 + " ^ " + temp1 + " ) ");
                         matrizResultado[0][n_conjuntos] = (String) temp3;
                         n_conjuntos++;
                         matrizResultado[0][n_conjuntos] = (String) temp4;
                         n_conjuntos++;
                         matrizResultado[0][n_conjuntos] = (String) temp5;
                         n_conjuntos++;
-                        pilaSalida.add("( " + temp1 + " v " + temp2 + " ) " + "^ ¬" + " ( " + temp1 + " ^ " + temp2 + " )");
+                        pilaSalida.add("( " + temp2 + " v " + temp1 + " ) " + "^ ¬" + " ( " + temp2 + " ^ " + temp1 + " )");
                         matrizResultado[0][n_conjuntos] = (String) pilaSalida.peek();
                         var1 = temp1.toString();
                         var2 = temp2.toString();
@@ -408,9 +408,9 @@ public class TablaVerdad {
     }
 
     private String voltearLetras(String cadena) {
-//        String[] vector = cadena.split("");
+        String[] vector = cadena.split("");
         String respuesta = "";
-//        for (int i = vector.length - 1; i >= 0; i--) {
+        for (int i = vector.length - 1; i >= 0; i--) {
 //            if (vector[i].equals("(")) {
 //                vector[i] = ")";
 //            } else if (vector[i].equals(")")) {
@@ -436,8 +436,8 @@ public class TablaVerdad {
 //                    flag = true;
 //                }
 //            }
-//            respuesta += vector[i];
-//        }
+            respuesta += vector[i];
+        }
         return respuesta;
     }
 

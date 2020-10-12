@@ -22,6 +22,7 @@ public class PnLateral extends JPanel {
     private Boton btnConjuntos;
     private Boton btnMatrices;
     private Boton btnAbout;
+    private Boton btnTutorial;
 
     /**
      * determina el tamanho de los botones en el panel
@@ -54,6 +55,7 @@ public class PnLateral extends JPanel {
         pnInferior.setBackground(PatronDisenho.MORADO_OSCURO);
 
         pnSuperior.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+        pnInferior.setLayout(new java.awt.GridLayout(0, 1));
 
         /**
          * Creacion de botones de mando
@@ -70,10 +72,14 @@ public class PnLateral extends JPanel {
         btnAbout = new Boton("?", null, dimensionBotones, tamanho, Boton.OESTE, Boton.TEXTO,
                 PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
                 PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
+        btnTutorial = new Boton("T", null, dimensionBotones, tamanho, Boton.OESTE, Boton.TEXTO,
+                PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
+                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
 
         pnSuperior.add(btnMenu);
         pnSuperior.add(btnConjuntos);
         pnSuperior.add(btnMatrices);
+        pnInferior.add(btnTutorial);
         pnInferior.add(btnAbout);
 
         /**
@@ -83,7 +89,6 @@ public class PnLateral extends JPanel {
         this.add(pnInferior, java.awt.BorderLayout.SOUTH);
     }
 
-    
     public Boton getBtnMenu() {
         return btnMenu;
     }

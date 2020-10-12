@@ -11,8 +11,6 @@ import javax.swing.JPanel;
 import static Unipamplona.MDiscretas.interfaz.InterfazMain.ancho;
 import Unipamplona.MDiscretas.interfaz.PatronDisenho;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -91,7 +89,6 @@ public class PnImagenSalida extends JPanel {
         pnArriba.add(btnGuardar, java.awt.BorderLayout.EAST);
 
         lbImagen = new JLabel();
-//        lbImagen.setIcon(new ImageIcon("./data/Iconos/1x/Proximamente_1366.png"));
         lbImagen.setOpaque(true);
         lbImagen.setBackground(PatronDisenho.GRIS_FONDO_2);
         lbImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -145,7 +142,6 @@ public class PnImagenSalida extends JPanel {
                 JOptionPane.showMessageDialog(null, "El fórmato de imagen introducido no está permitido", "Error al guardar imagen",
                             JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
             }
-            //posible error si vabre una archivo incorrecto, hacer entana mensaje
         }
     }
 
