@@ -402,7 +402,8 @@ public class TablaVerdad {
             String ascii = Character.toString(c);
             matrizResultado[0][i] = ascii + " ( " + lista.get(i) + " )";
         }
-        operacionResuelta = voltearLetras(matrizResultado[0][columnas - 1]);
+//        operacionResuelta = voltearLetras(matrizResultado[0][columnas - 1]);
+        operacionResuelta = matrizResultado[0][columnas - 1];
 
     }
 

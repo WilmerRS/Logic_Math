@@ -1,7 +1,5 @@
 package Unipamplona.MDiscretas.interfaz;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 
 /**
@@ -21,6 +19,10 @@ public class InterfazMain extends javax.swing.JFrame {
     private PnCabecera cabecera;
     private PnCentralConjuntos centralConjuntos;
     private PnCentralRelaciones centralRelaciones;
+
+    private final String TITULO = "Logic Math";
+    private final String TITULO_CON = "Conjuntos - Operaciones";
+    private final String TITULO_REL = "Relaciones - Operaciones";
 
     /**
      * Constructor de una nueva InterfazMain
@@ -58,25 +60,23 @@ public class InterfazMain extends javax.swing.JFrame {
 
     private void crearPanelesPrincipales() {
         lateral = new PnLateral();
-        cabecera = new PnCabecera("Conjuntos - Operaciones");
+        cabecera = new PnCabecera(TITULO_CON);
         centralConjuntos = new PnCentralConjuntos();
         centralRelaciones = new PnCentralRelaciones();
 
         Background.add(lateral, java.awt.BorderLayout.LINE_START);
         pnDerechaFondo.add(cabecera, java.awt.BorderLayout.NORTH);
         pnDerechaFondo.add(centralConjuntos, java.awt.BorderLayout.CENTER);
+        setTitle(TITULO + " - " + centralConjuntos.getTITULO_RELACIONES());
         agregarEventosBtnLaterales();
     }
 
     private void agregarEventosBtnLaterales() {
-//        lateral.getBtnMatrices().setActivoSiempre(false);
-//        lateral.getBtnMatrices().requestFocus(false);
         lateral.getBtnConjuntos().setActivoSiempre(true);
         lateral.getBtnConjuntos().requestFocus();
 
-        lateral.getBtnConjuntos().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
+        lateral.getBtnConjuntos().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lateral.getBtnMatrices().setActivoSiempre(false);
                 lateral.getBtnMatrices().requestFocus(false);
                 lateral.getBtnConjuntos().setActivoSiempre(true);
@@ -84,45 +84,14 @@ public class InterfazMain extends javax.swing.JFrame {
 
                 centralConjuntos.setVisible(true);
                 centralRelaciones.setVisible(false);
-//                centralConjuntos.getPnEntDatos().getTxtEntrada().setVisible(true);
-                centralRelaciones.getV().setVisible(false);
                 pnDerechaFondo.add(centralConjuntos, java.awt.BorderLayout.CENTER);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                lateral.getBtnMatrices().setActivoSiempre(false);
-                lateral.getBtnMatrices().requestFocus(false);
-                lateral.getBtnConjuntos().setActivoSiempre(true);
-                lateral.getBtnConjuntos().requestFocus(true);
-
-                centralConjuntos.setVisible(true);
-                centralRelaciones.setVisible(false);
-//                centralConjuntos.getPnEntDatos().getTxtEntrada().setVisible(true);
-                centralRelaciones.getV().setVisible(false);
-                pnDerechaFondo.add(centralConjuntos, java.awt.BorderLayout.CENTER);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-
+                setTitle(TITULO + " - " + centralConjuntos.getTITULO_RELACIONES());
+                cabecera.actualizarTitulo(TITULO_CON);
             }
         });
 
-        lateral.getBtnMatrices().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-
+        lateral.getBtnMatrices().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lateral.getBtnConjuntos().setActivoSiempre(false);
                 lateral.getBtnConjuntos().requestFocus(false);
                 lateral.getBtnMatrices().setActivoSiempre(true);
@@ -130,42 +99,12 @@ public class InterfazMain extends javax.swing.JFrame {
 
                 centralConjuntos.setVisible(false);
                 centralRelaciones.setVisible(true);
-//                centralConjuntos.getPnEntDatos().getTxtEntrada().setVisible(false);
-                centralRelaciones.getV().setVisible(true);
                 pnDerechaFondo.add(centralRelaciones, java.awt.BorderLayout.CENTER);
-            }
 
-            @Override
-            public void mousePressed(MouseEvent me) {
-                lateral.getBtnConjuntos().setActivoSiempre(false);
-                lateral.getBtnConjuntos().requestFocus(false);
-                lateral.getBtnMatrices().setActivoSiempre(true);
-                lateral.getBtnMatrices().requestFocus(true);
-
-                centralConjuntos.setVisible(false);
-                centralRelaciones.setVisible(true);
-//                centralConjuntos.getPnEntDatos().getTxtEntrada().setVisible(false);
-                centralRelaciones.getV().setVisible(true);
-
-                pnDerechaFondo.add(centralRelaciones, java.awt.BorderLayout.CENTER);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-
+                setTitle(TITULO + " - " + centralRelaciones.getTITULO_RELACIONES());
+                cabecera.actualizarTitulo(TITULO_REL);
             }
         });
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

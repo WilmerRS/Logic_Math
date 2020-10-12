@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import static Unipamplona.MDiscretas.interfaz.InterfazMain.alto;
 import static Unipamplona.MDiscretas.interfaz.InterfazMain.ancho;
 import Unipamplona.MDiscretas.interfaz.PatronDisenho;
-import Unipamplona.MDiscretas.mundo.Interpretador;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -19,14 +18,9 @@ import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 /**
@@ -118,7 +112,7 @@ public class PnEntradaDatos extends JPanel {
 
         btnCalcular = new Boton("Calcular", null, new Dimension((int) (ancho * 0.07), (int) (alto * 0.063)),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.MORADO_CABECERA, PatronDisenho.MORADO_CLARO,
-                PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO, 0);
 
         pnSuperior.add(pnEntrada, java.awt.BorderLayout.CENTER);
         pnSuperior.add(btnCalcular, java.awt.BorderLayout.EAST);
@@ -130,28 +124,28 @@ public class PnEntradaDatos extends JPanel {
         Dimension dimBotonesOper = new Dimension((int) (ancho * 0.037), (int) (alto * 0.063));
         btnUnion = new Boton(" U ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnInterseccion = new Boton(" I ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnComplemento = new Boton(" C ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnDiferencia = new Boton(" D ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnDifSimetrica = new Boton(" DS ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnParentesisIzq = new Boton(" ( ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnParentesisDer = new Boton(" ) ", null, dimBotonesOper, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.GRIS_RESALTADOR, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
         btnLimpiar = new Boton("Limpiar ", null, dimBotonesOper,
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.ROJO_OSCURO, PatronDisenho.ROJO_CLARO,
-                PatronDisenho.ROJO_HOVER, PatronDisenho.ROJO_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.ROJO_HOVER, PatronDisenho.ROJO_CLICK, PatronDisenho.BLANCO, 0);
 
         agregarEventosBtn();
 

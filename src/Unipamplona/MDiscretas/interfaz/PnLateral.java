@@ -60,16 +60,16 @@ public class PnLateral extends JPanel {
          */
         btnMenu = new Boton("[[]]", null, dimensionBotones, tamanho, Boton.OESTE, Boton.TEXTO,
                 PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
-                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
         btnConjuntos = new Boton("C", null, dimensionBotones, tamanho, Boton.OESTE, Boton.TEXTO,
                 PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
-                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
         btnMatrices = new Boton("R", null, dimensionBotones, tamanho, Boton.OESTE, Boton.TEXTO,
                 PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
-                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
         btnAbout = new Boton("?", null, dimensionBotones, tamanho, Boton.OESTE, Boton.TEXTO,
                 PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
-                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
 
         pnSuperior.add(btnMenu);
         pnSuperior.add(btnConjuntos);

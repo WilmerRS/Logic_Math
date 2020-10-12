@@ -21,6 +21,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -148,7 +149,7 @@ public class VnConjunto extends javax.swing.JDialog {
 
         btnAgregar = new Boton("Agregar", null, new Dimension((int) (ancho * 0.0666), 50),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.MORADO_CABECERA, PatronDisenho.MORADO_CLARO,
-                PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO, 0);
 
         pnAgregarFondo.add(crearPnEtiqueta("Agregar elemento:"), java.awt.BorderLayout.WEST);
         pnAgregarFondo.add(pnEntradaAgregar, java.awt.BorderLayout.CENTER);
@@ -171,7 +172,7 @@ public class VnConjunto extends javax.swing.JDialog {
 
         btnEliminar = new Boton("Eliminar", null, new Dimension((int) (ancho * 0.0666), 50),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.GRIS_FONDO_2, PatronDisenho.ROJO_OSCURO,
-                PatronDisenho.GRIS_HOVER, PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
+                PatronDisenho.GRIS_HOVER, PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
 
         pnEliminarFondo.add(crearPnEtiqueta("Eliminar elemento:"), java.awt.BorderLayout.WEST);
         pnEliminarFondo.add(pnEntradraEliminar, java.awt.BorderLayout.CENTER);
@@ -196,11 +197,11 @@ public class VnConjunto extends javax.swing.JDialog {
 
         btnAceptar = new Boton("Aceptar", null, new Dimension((int) (ancho * 0.08), 50),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.MORADO_CABECERA, PatronDisenho.MORADO_CLARO,
-                PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO, 0);
 
         btnCancelar = new Boton("Cancelar", null, new Dimension((int) (ancho * 0.075), 50),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.ROJO_OSCURO, PatronDisenho.ROJO_CLARO,
-                PatronDisenho.ROJO_HOVER, PatronDisenho.ROJO_CLICK, PatronDisenho.BLANCO);
+                PatronDisenho.ROJO_HOVER, PatronDisenho.ROJO_CLICK, PatronDisenho.BLANCO, 0);
 
         pnBotonesFondo.add(btnAceptar);
         pnBotonesFondo.add(btnCancelar);
@@ -244,6 +245,8 @@ public class VnConjunto extends javax.swing.JDialog {
     private JPanel crearPnEtiqueta(String texto) {
         JPanel temp = new JPanel();
         JLabel lbEtiqueta = new JLabel(texto);
+        lbEtiqueta.setOpaque(true);
+        lbEtiqueta.setBackground(PatronDisenho.BLANCO);
         lbEtiqueta.setForeground(PatronDisenho.MORADO_OSCURO);
         lbEtiqueta.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         if (ancho < 1500) {
@@ -256,7 +259,13 @@ public class VnConjunto extends javax.swing.JDialog {
         temp.setLayout(new java.awt.BorderLayout());
         temp.setBackground(PatronDisenho.BLANCO);
 
-        temp.add(lbEtiqueta);
+        JScrollPane spConjunto = new JScrollPane(lbEtiqueta,
+                JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        spConjunto.setBorder(null);
+        spConjunto.setViewportView(lbEtiqueta);
+
+        temp.add(spConjunto);
         return temp;
     }
 
@@ -418,11 +427,11 @@ public class VnConjunto extends javax.swing.JDialog {
         pnColor.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                Color color = JColorChooser.showDialog(pnColor, "Elige el color del conjunto", conjuntoTemporal.getColor());
+                Color color = JColorChooser.showDialog(pnColor, "Elige el color del conjunto", getConjuntoTemporal().getColor());
                 if (color != null && color != PatronDisenho.BLANCO) {
                     Color temp = new Color(color.getRGB());
                     pnColor.setBackground(temp);
-                    conjuntoTemporal.setColor(temp);
+                    getConjuntoTemporal().setColor(temp);
                 }
             }
 
@@ -454,7 +463,8 @@ public class VnConjunto extends javax.swing.JDialog {
                             JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
                 } else {
                     if (!conjuntoTemporal.getElementos().contains(txtElemento.getText())) {
-                        conjuntoTemporal.getElementos().add(txtElemento.getText());
+                        getConjuntoTemporal().getElementos().add(txtElemento.getText());
+                        txtElemento.requestFocus();
                         actualizarElementos();
                     } else {
                         JOptionPane.showMessageDialog(null, "El elemento ya existe en el conjunto.\n", "Error en la entrada",
@@ -469,21 +479,18 @@ public class VnConjunto extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "No puede eliminar un elemento vacío.\n", "Error en la entrada",
                             JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
                 } else {
-                    if(conjuntoTemporal.getElementos().contains(txtPosicion.getText())){
-                        conjuntoTemporal.getElementos().remove(txtPosicion.getText());
-                            actualizarElementos();
-                    }else{
+                    if (getConjuntoTemporal().getElementos().contains(txtPosicion.getText())) {
+                        getConjuntoTemporal().getElementos().remove(txtPosicion.getText());
+                        txtPosicion.requestFocus();
+                        actualizarElementos();
+                    } else {
                         JOptionPane.showMessageDialog(null, "El elemento indicado no existe dentro del conjunto.\n", "Error en la entrada",
-                                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                                JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
                     }
                 }
             }
         });
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("Aceptar");
-            }
-        });
+
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea salir?   \n", "Salir de " + titulo,
@@ -494,5 +501,21 @@ public class VnConjunto extends javax.swing.JDialog {
             }
         });
     }
-    
+
+    public Boton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public void setBtnAceptar(Boton btnAceptar) {
+        this.btnAceptar = btnAceptar;
+    }
+
+    public Conjunto getConjuntoTemporal() {
+        return conjuntoTemporal;
+    }
+
+    public void setConjuntoTemporal(Conjunto conjuntoTemporal) {
+        this.conjuntoTemporal = conjuntoTemporal;
+    }
+
 }

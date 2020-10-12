@@ -30,6 +30,12 @@ public class PnCabecera extends JPanel {
         crearPanel();
     }
 
+    public void actualizarTitulo(String titulo){
+        this.titulo = titulo;
+        tituloCabecera.setText("   "+titulo);
+        tituloCabecera.updateUI();
+    }
+    
     private void crearPanel() {
         this.setBackground(PatronDisenho.MORADO_CABECERA);
         this.setMinimumSize(new Dimension(1000, (int) (alto * 0.063)));

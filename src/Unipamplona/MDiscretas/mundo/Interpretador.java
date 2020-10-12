@@ -81,7 +81,7 @@ public class Interpretador {
         }
         return i;
     }
-
+    
     public String descomponerOperacion(String entrada) {
         String primera = analizarCadena(entrada);
         String resultadoStr = "";
@@ -182,7 +182,7 @@ public class Interpretador {
         return respuesta;
     }
 
-    private String cadenaInterpretada(String cadena) {
+    public String cadenaInterpretada(String cadena) {
         String primera = analizarCadena(cadena);
         String resultadoStr = "";
 

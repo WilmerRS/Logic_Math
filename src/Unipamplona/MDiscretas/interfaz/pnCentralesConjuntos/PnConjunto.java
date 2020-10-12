@@ -41,10 +41,19 @@ public class PnConjunto extends JPanel {
 
     private Dimension dimension;
 
-    public PnConjunto(Color color, Dimension dimension) {
+    private String elementos;
+
+    private boolean editarActivo;
+    
+    private int indice;
+
+    public PnConjunto(Color color, Dimension dimension, String elementos, boolean editarActivo, int indice) {
         super();
         colorConjunto = color;
+        this.elementos = elementos;
         this.dimension = dimension;
+        this.editarActivo = editarActivo;
+        this.indice = indice;
         crearPanel();
     }
 
@@ -70,20 +79,21 @@ public class PnConjunto extends JPanel {
 
         btnEliminar = new Boton(" X ", null, dimension, tamanho, Boton.SUR, Boton.TEXTO,
                 PatronDisenho.BLANCO, PatronDisenho.ROJO_OSCURO, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
-        btnEditar = new Boton(" E ", null, dimension, tamanho, Boton.SUR, Boton.TEXTO,
-                PatronDisenho.BLANCO, PatronDisenho.MORADO_OSCURO, PatronDisenho.GRIS_HOVER,
-                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR);
-
-        pnBotones.add(btnEditar);
+                PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, indice);
+        if (editarActivo) {
+            btnEditar = new Boton(" E ", null, dimension, tamanho, Boton.SUR, Boton.TEXTO,
+                    PatronDisenho.BLANCO, PatronDisenho.MORADO_OSCURO, PatronDisenho.GRIS_HOVER,
+                    PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, indice);
+            pnBotones.add(btnEditar);
+        }
         pnBotones.add(btnEliminar);
 
-        lbConjunto = new JLabel("    A = { 1, 2, 3,SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 4, 1, 2  }");
+        lbConjunto = new JLabel("     " + elementos);
 
         lbConjunto.setForeground(PatronDisenho.MORADO_OSCURO);
         lbConjunto.setOpaque(true);
         lbConjunto.setBackground(PatronDisenho.BLANCO);
-        
+
         if (ancho < 1500) {
             lbConjunto.setFont(PatronDisenho.SEGOE_12);
         } else {
@@ -108,4 +118,34 @@ public class PnConjunto extends JPanel {
         this.add(pnBotones, java.awt.BorderLayout.EAST);
     }
 
+    public void actualizarElementos(String elementos) {
+        this.elementos = elementos;
+        lbConjunto.setText("     " + elementos);
+        lbConjunto.updateUI();
+    }
+
+
+    public Boton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public void setBtnEliminar(Boton btnEliminar) {
+        this.btnEliminar = btnEliminar;
+    }
+
+    public Boton getBtnEditar() {
+        return btnEditar;
+    }
+
+    public void setBtnEditar(Boton btnEditar) {
+        this.btnEditar = btnEditar;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
 }

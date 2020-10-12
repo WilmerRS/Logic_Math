@@ -9,6 +9,7 @@ public class Conjunto {
     private String nombre;
     private ArrayList<String> elementos;
     private Color color;
+    private String elementosActuales;
 
     public Conjunto(String nombre, ArrayList elementos, Color color) {
         this.nombre = nombre;
@@ -20,6 +21,18 @@ public class Conjunto {
         return elementos;
     }
 
+    public String getCadenaElementos(){
+        String texto = getNombre()+ " = { ";
+        for (int i = 0; i < elementos.size(); i++) {
+            if (i != 0) {
+                texto += ", ";
+            }
+            texto += elementos.get(i);
+        }
+        texto += " }";
+        return texto;
+    }
+    
     public void setElementos(ArrayList elementos) {
         this.elementos = elementos;
     }
@@ -39,6 +52,13 @@ public class Conjunto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
+    public String getElementosActuales() {
+        return elementosActuales;
+    }
+
+    public void setElementosActuales(String elementosActuales) {
+        this.elementosActuales = elementosActuales;
+    }
     
 }

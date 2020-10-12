@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 public class PnCentralRelaciones extends JPanel {
 
     private JTextField v;
+    
+    private final String TITULO_RELACIONES = "Relaciones";
 
     public PnCentralRelaciones() {
         super();
@@ -43,5 +45,9 @@ public class PnCentralRelaciones extends JPanel {
 
     public void setV(JTextField v) {
         this.v = v;
+    }
+
+    public String getTITULO_RELACIONES() {
+        return TITULO_RELACIONES;
     }
 }

@@ -47,9 +47,10 @@ public class Boton extends JButton {
 
     JLabel lbTexto;
     JLabel lbIcono;
+    private int indice;
 
     public Boton(String texto, String ruta, Dimension dimension, int tamanho, int foco, int textoIcono,
-            Color PRIMARIO, Color FOCO, Color HOVER, Color CLICK, Color COLOR_FUENTE) {
+            Color PRIMARIO, Color FOCO, Color HOVER, Color CLICK, Color COLOR_FUENTE, int indice) {
         super();
         activoSiempre = false;
         this.PRIMARIO = PRIMARIO;
@@ -58,6 +59,7 @@ public class Boton extends JButton {
         this.CLICK = CLICK;
         this.COLOR_FUENTE = COLOR_FUENTE;
         this.TAMANHO = tamanho;
+        this.indice = indice;
         iniciar(texto, ruta, foco, textoIcono, dimension);
     }
 
@@ -205,5 +207,13 @@ public class Boton extends JButton {
 
     public void setActivoSiempre(boolean activoSiempre) {
         this.activoSiempre = activoSiempre;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
     }
 }

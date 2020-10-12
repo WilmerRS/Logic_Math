@@ -167,4 +167,12 @@ public class PnTablaVerdad extends JPanel {
     public void setOperacionInfija(String operacionInfija) {
         this.operacionInfija = operacionInfija;
     }
+
+    public String getOperacionResuelta() {
+        return operacionResuelta;
+    }
+
+    public void setOperacionResuelta(String operacionResuelta) {
+        this.operacionResuelta = operacionResuelta;
+    }
 }

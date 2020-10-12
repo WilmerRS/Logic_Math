@@ -2,14 +2,12 @@
 package Unipamplona.MDiscretas.mundo;
 
 import Unipamplona.MDiscretas.interfaz.InterfazMain;
-
 /**
  *
  * @author WILMER
  */
 public class Main {
     
-    private static Conjuntos conjuntos;
     
     public static void main(String[] args) {
         try {
@@ -31,12 +29,4 @@ public class Main {
         });
     }
 
-    public static Conjuntos getTodo() {
-        return conjuntos;
-    }
-
-    public static void setConjuntos(Conjuntos conjuntos) {
-        conjuntos = conjuntos;
-    }
-    
 }
