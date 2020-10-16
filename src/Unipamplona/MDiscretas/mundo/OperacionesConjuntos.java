@@ -5,6 +5,7 @@
  */
 package Unipamplona.MDiscretas.mundo;
 
+import Unipamplona.MDiscretas.interfaz.PatronDisenho;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -154,12 +155,12 @@ public class OperacionesConjuntos {
         } catch (Exception e) {
             return  null;
         }
-        return new Conjunto(conjuntos.getNombreRecomendado(), conjuntoRespuesta, conjuntos.getColorRecomendado());
+        return new Conjunto(conjuntos.getNombreRecomendado(), conjuntoRespuesta, PatronDisenho.getColorAleatorio());
     }
 
     private Conjunto buscarConjunto(String nombre) {
         int posConjunto = conjuntos.buscarConjunto(nombre);
-        Conjunto A = new Conjunto(nombre, new ArrayList<>(), conjuntos.getColorRecomendado());
+        Conjunto A = new Conjunto(nombre, new ArrayList<>(), PatronDisenho.getColorAleatorio());
         if (posConjunto != -1) {
             A = conjuntos.getConjuntos().get(posConjunto);
         } else {

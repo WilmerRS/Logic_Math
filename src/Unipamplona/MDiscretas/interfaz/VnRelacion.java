@@ -1,8 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Unipamplona.MDiscretas.interfaz;
 
 import static Unipamplona.MDiscretas.interfaz.InterfazMain.alto;
 import static Unipamplona.MDiscretas.interfaz.InterfazMain.ancho;
 import Unipamplona.MDiscretas.mundo.Conjunto;
+import Unipamplona.MDiscretas.mundo.Relacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -25,13 +31,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class VnConjunto extends javax.swing.JDialog {
+public class VnRelacion extends javax.swing.JDialog {
 
     private final String MAYUS = "MAYUS";
     private final String MINUS_MAYUS = "MINUS_MAYUS";
     private final String NUMEROS = "NUMEROS";
 
-    private Conjunto conjuntoTemporal;
+    private Relacion relacionTemporal;
 
     private PnCabecera pnCabecera;
     private JPanel pnFondo;
@@ -52,11 +58,15 @@ public class VnConjunto extends javax.swing.JDialog {
     private JPanel pnColor;
     private JPanel pnActualElementos;
 
+    private JPanel pnEntradaAgregarDer;
+    private JPanel pnEntradaAgregarIzq;
     private JPanel pnEntradaAgregar;
+
     private JPanel pnEntradraEliminar;
 
     private JTextField txtNombre;
-    private JTextField txtElemento;
+    private JTextField txtElementoA;
+    private JTextField txtElementoB;
     private JTextField txtPosicion;
 
     private String titulo;
@@ -69,14 +79,14 @@ public class VnConjunto extends javax.swing.JDialog {
     private JPanel pnNombreEntrada;
 
     private int tamanho = (int) (ancho * 0.003);
-    
+
     private boolean editarNombre;
 
-    public VnConjunto(java.awt.Frame parent, boolean modal, String titulo, Conjunto conjunto, boolean editarNombre) {
+    public VnRelacion(java.awt.Frame parent, boolean modal, String titulo, Relacion relacionTemporal, boolean editarNombre) {
         super(parent, modal);
         this.titulo = titulo;
         this.editarNombre = editarNombre;
-        this.conjuntoTemporal = conjunto;
+        this.relacionTemporal = relacionTemporal;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -105,12 +115,12 @@ public class VnConjunto extends javax.swing.JDialog {
         pnNombreFondo = new JPanel();
         pnNombreFondo.setBackground(PatronDisenho.BLANCO);
         pnNombreFondo.setLayout(new java.awt.BorderLayout(15, 15));
-        pnNombreFondo.add(crearPnEtiqueta("Nombre del conjunto:"), java.awt.BorderLayout.WEST);
+        pnNombreFondo.add(crearPnEtiqueta("Nombre de la relación:"), java.awt.BorderLayout.WEST);
 
         pnNombreEntrada = new JPanel();
         pnNombreEntrada.setLayout(new BorderLayout());
 
-        txtNombre = new JTextField(conjuntoTemporal.getNombre());
+        txtNombre = new JTextField(relacionTemporal.getNombre());
         txtNombre = modificarPnEntrada(txtNombre, MAYUS);
         txtNombre.setEditable(editarNombre);
         pnNombreEntrada.add(txtNombre, java.awt.BorderLayout.CENTER);
@@ -126,7 +136,7 @@ public class VnConjunto extends javax.swing.JDialog {
         pnEtiquetaColor.setPreferredSize(new java.awt.Dimension((int) (ancho * 0.03), (int) (alto * 0.0468)));
 
         pnColor = new JPanel();
-        pnColor.setBackground(conjuntoTemporal.getColor());
+        pnColor.setBackground(relacionTemporal.getColor());
         pnColor.setPreferredSize(new java.awt.Dimension((int) (ancho * 0.032), (int) (alto * 0.03)));
 
         agregarEventosPnColor();
@@ -140,22 +150,40 @@ public class VnConjunto extends javax.swing.JDialog {
         pnAgregarFondo.setBackground(PatronDisenho.BLANCO);
         pnAgregarFondo.setLayout(new java.awt.BorderLayout(15, 15));
 
+        pnEntradaAgregarDer = new JPanel();
+        pnEntradaAgregarDer.setBackground(PatronDisenho.BLANCO);
+        pnEntradaAgregarDer.setLayout(new java.awt.BorderLayout(0, 0));
+
+        txtElementoA = new JTextField();
+        txtElementoA = modificarPnEntrada(txtElementoA, MINUS_MAYUS);
+        pnEntradaAgregarDer.add(txtElementoA, java.awt.BorderLayout.CENTER);
+
+        pnEntradaAgregarDer.add(crearPnEtiqueta("Elemento a:"), java.awt.BorderLayout.NORTH);
+        pnEntradaAgregarDer.add(crearOrilla(), java.awt.BorderLayout.SOUTH);
+
+        pnEntradaAgregarIzq = new JPanel();
+        pnEntradaAgregarIzq.setBackground(PatronDisenho.BLANCO);
+        pnEntradaAgregarIzq.setLayout(new java.awt.BorderLayout(0, 0));
+
+        txtElementoB = new JTextField();
+        txtElementoB = modificarPnEntrada(txtElementoB, MINUS_MAYUS);
+        pnEntradaAgregarIzq.add(txtElementoB, java.awt.BorderLayout.CENTER);
+
+        pnEntradaAgregarIzq.add(crearPnEtiqueta("Elemento b:"), java.awt.BorderLayout.NORTH);
+        pnEntradaAgregarIzq.add(crearOrilla(), java.awt.BorderLayout.SOUTH);
+
         pnEntradaAgregar = new JPanel();
         pnEntradaAgregar.setBackground(PatronDisenho.BLANCO);
-        pnEntradaAgregar.setLayout(new java.awt.BorderLayout(0, 0));
+        pnEntradaAgregar.setLayout(new java.awt.GridLayout(1, 2, 4,4));
 
-        txtElemento = new JTextField();
-        txtElemento = modificarPnEntrada(txtElemento, MINUS_MAYUS);
-        pnEntradaAgregar.add(txtElemento, java.awt.BorderLayout.CENTER);
-
-        pnEntradaAgregar.add(crearPnEtiqueta("Elemento:"), java.awt.BorderLayout.NORTH);
-        pnEntradaAgregar.add(crearOrilla(), java.awt.BorderLayout.SOUTH);
+        pnEntradaAgregar.add(pnEntradaAgregarDer);
+        pnEntradaAgregar.add(pnEntradaAgregarIzq);
 
         btnAgregar = new Boton("Agregar", null, new Dimension((int) (ancho * 0.0666), 50),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.MORADO_CABECERA, PatronDisenho.MORADO_CLARO,
                 PatronDisenho.MORADO_CABECERA_HOVER, PatronDisenho.MORADO_CABECERA_CLICK, PatronDisenho.BLANCO, 0);
 
-        pnAgregarFondo.add(crearPnEtiqueta("Agregar elemento:"), java.awt.BorderLayout.WEST);
+        pnAgregarFondo.add(crearPnEtiqueta("Agregar par:"), java.awt.BorderLayout.WEST);
         pnAgregarFondo.add(pnEntradaAgregar, java.awt.BorderLayout.CENTER);
         pnAgregarFondo.add(btnAgregar, java.awt.BorderLayout.EAST);
 
@@ -168,17 +196,17 @@ public class VnConjunto extends javax.swing.JDialog {
         pnEntradraEliminar.setLayout(new java.awt.BorderLayout(0, 0));
 
         txtPosicion = new JTextField();
-        txtPosicion = modificarPnEntrada(txtPosicion, MINUS_MAYUS);
+        txtPosicion = modificarPnEntrada(txtPosicion, "");
         pnEntradraEliminar.add(txtPosicion, java.awt.BorderLayout.CENTER);
 
-        pnEntradraEliminar.add(crearPnEtiqueta("Elemento:"), java.awt.BorderLayout.NORTH);
+        pnEntradraEliminar.add(crearPnEtiqueta("Posición:"), java.awt.BorderLayout.NORTH);
         pnEntradraEliminar.add(crearOrilla(), java.awt.BorderLayout.SOUTH);
 
         btnEliminar = new Boton("Eliminar", null, new Dimension((int) (ancho * 0.0666), 50),
                 tamanho, Boton.SUR, Boton.TEXTO, PatronDisenho.GRIS_FONDO_2, PatronDisenho.ROJO_OSCURO,
                 PatronDisenho.GRIS_HOVER, PatronDisenho.GRIS_CLICK, PatronDisenho.GRIS_RESALTADOR, 0);
 
-        pnEliminarFondo.add(crearPnEtiqueta("Eliminar elemento:"), java.awt.BorderLayout.WEST);
+        pnEliminarFondo.add(crearPnEtiqueta("Eliminar par:"), java.awt.BorderLayout.WEST);
         pnEliminarFondo.add(pnEntradraEliminar, java.awt.BorderLayout.CENTER);
         pnEliminarFondo.add(btnEliminar, java.awt.BorderLayout.EAST);
 
@@ -192,7 +220,7 @@ public class VnConjunto extends javax.swing.JDialog {
 
         actualizarElementos();
 
-        pnElementosFondo.add(crearPnEtiqueta("Elementos actuales:"), java.awt.BorderLayout.WEST);
+        pnElementosFondo.add(crearPnEtiqueta("Pares actuales:"), java.awt.BorderLayout.WEST);
         pnElementosFondo.add(pnActualElementos, java.awt.BorderLayout.CENTER);
 
         pnBotonesFondo = new JPanel();
@@ -230,16 +258,7 @@ public class VnConjunto extends javax.swing.JDialog {
     }
 
     private void actualizarElementos() {
-        ArrayList<String> temporal = conjuntoTemporal.getElementos();
-        String texto = "" + conjuntoTemporal.getNombre() + " = { ";
-
-        for (int i = 0; i < temporal.size(); i++) {
-            if (i != 0) {
-                texto += ", ";
-            }
-            texto += temporal.get(i);
-        }
-        texto += " }";
+        String texto = relacionTemporal.getCadenaElementos();
         pnActualElementos.removeAll();
         pnActualElementos.add(crearOrilla(), java.awt.BorderLayout.SOUTH);
         pnActualElementos.add(crearPnEtiqueta(texto), java.awt.BorderLayout.CENTER);
@@ -281,12 +300,12 @@ public class VnConjunto extends javax.swing.JDialog {
         return pnOrilla;
     }
 
-    public Conjunto getTemporal() {
-        return conjuntoTemporal;
+    public Relacion getTemporal() {
+        return relacionTemporal;
     }
 
-    public void setTemporal(Conjunto temporal) {
-        this.conjuntoTemporal = temporal;
+    public void setTemporal(Relacion relacionTemporal) {
+        this.relacionTemporal = relacionTemporal;
     }
 
     private void inicializarMargenes() {
@@ -402,7 +421,7 @@ public class VnConjunto extends javax.swing.JDialog {
                         String texto = "";
                         texto += (temp1.charAt(temp1.length() - 1) + "").toUpperCase();
                         campo.setText(texto);
-                        conjuntoTemporal.setNombre(texto);
+                        relacionTemporal.setNombre(texto);
                         actualizarElementos();
                     } else {
                         campo.setText("");
@@ -431,11 +450,11 @@ public class VnConjunto extends javax.swing.JDialog {
         pnColor.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                Color color = JColorChooser.showDialog(pnColor, "Elige el color del conjunto", getConjuntoTemporal().getColor());
+                Color color = JColorChooser.showDialog(pnColor, "Elige el color del conjunto", relacionTemporal.getColor());
                 if (color != null && color != PatronDisenho.BLANCO) {
                     Color temp = new Color(color.getRGB());
                     pnColor.setBackground(temp);
-                    getConjuntoTemporal().setColor(temp);
+                    relacionTemporal.setColor(temp);
                 }
             }
 
@@ -462,13 +481,16 @@ public class VnConjunto extends javax.swing.JDialog {
     private void agregarEventosBotones() {
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (txtElemento.getText().equals("")) {
+                if (txtElementoA.getText().equals("") || txtElementoB.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "No puede agregar un elemento vacío.\n", "Error en la entrada",
                             JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
                 } else {
-                    if (!conjuntoTemporal.getElementos().contains(txtElemento.getText())) {
-                        getConjuntoTemporal().getElementos().add(txtElemento.getText());
-                        txtElemento.requestFocus();
+                    String[] temp = new String[2];
+                    temp[0] = txtElementoA.getText();
+                    temp[1] = txtElementoB.getText();
+                    if (!relacionTemporal.existePar(temp)) {
+                        relacionTemporal.getPares().add(temp);
+                        txtElementoA.requestFocus();
                         actualizarElementos();
                     } else {
                         JOptionPane.showMessageDialog(null, "El elemento ya existe en el conjunto.\n", "Error en la entrada",
@@ -477,20 +499,30 @@ public class VnConjunto extends javax.swing.JDialog {
                 }
             }
         });
+
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (txtPosicion.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "No puede eliminar un elemento vacío.\n", "Error en la entrada",
+                    JOptionPane.showMessageDialog(null, "No puede eliminar una posición vacía.\n", "Error en la entrada",
                             JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
                 } else {
-                    if (getConjuntoTemporal().getElementos().contains(txtPosicion.getText())) {
-                        getConjuntoTemporal().getElementos().remove(txtPosicion.getText());
-                        txtPosicion.requestFocus();
-                        actualizarElementos();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El elemento indicado no existe dentro del conjunto.\n", "Error en la entrada",
+                    try {
+                        int pos = Integer.parseInt(txtPosicion.getText());
+                        if (pos >= 0 && pos < relacionTemporal.getPares().size()) {
+                            relacionTemporal.getPares().remove(pos);
+                            txtPosicion.requestFocus();
+                            actualizarElementos();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "La posición digitada no es válida. La posicion debe ser un número\n"
+                                    + "entero mayor a cero y menor al tamaño de los pares de la relación", "Error en la entrada",
+                                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "La posición digitada no es válida. La posicion debe ser un número\n"
+                                + "entero mayor a cero y menor al tamaño de los pares de la relación", "Error en la entrada",
                                 JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
                     }
+
                 }
             }
         });
@@ -512,14 +544,6 @@ public class VnConjunto extends javax.swing.JDialog {
 
     public void setBtnAceptar(Boton btnAceptar) {
         this.btnAceptar = btnAceptar;
-    }
-
-    public Conjunto getConjuntoTemporal() {
-        return conjuntoTemporal;
-    }
-
-    public void setConjuntoTemporal(Conjunto conjuntoTemporal) {
-        this.conjuntoTemporal = conjuntoTemporal;
     }
 
 }

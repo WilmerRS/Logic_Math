@@ -102,7 +102,6 @@ public class PnImagenSalida extends JPanel {
 
         int max = 60, min = 30, ini = 40;
         if (ancho < 1500) {
-            System.out.println("2");
             max = 40;
             min = 20;
             ini = 25;

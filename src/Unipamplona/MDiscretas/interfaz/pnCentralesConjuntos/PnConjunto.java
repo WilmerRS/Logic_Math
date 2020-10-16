@@ -49,7 +49,7 @@ public class PnConjunto extends JPanel {
 
     public PnConjunto(Color color, Dimension dimension, String elementos, boolean editarActivo, int indice) {
         super();
-        colorConjunto = color;
+        this.colorConjunto = color;
         this.elementos = elementos;
         this.dimension = dimension;
         this.editarActivo = editarActivo;
@@ -124,7 +124,12 @@ public class PnConjunto extends JPanel {
         lbConjunto.updateUI();
     }
 
-
+    public void actualizarColor(Color colorNuevo){
+        colorConjunto = colorNuevo;
+        pnColorInterno.setBackground(colorConjunto);
+        pnColorInterno.update(pnColorInterno.getGraphics());
+    }
+    
     public Boton getBtnEliminar() {
         return btnEliminar;
     }

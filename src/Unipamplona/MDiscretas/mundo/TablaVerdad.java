@@ -402,43 +402,8 @@ public class TablaVerdad {
             String ascii = Character.toString(c);
             matrizResultado[0][i] = ascii + " ( " + lista.get(i) + " )";
         }
-//        operacionResuelta = voltearLetras(matrizResultado[0][columnas - 1]);
         operacionResuelta = matrizResultado[0][columnas - 1];
 
-    }
-
-    private String voltearLetras(String cadena) {
-        String[] vector = cadena.split("");
-        String respuesta = "";
-        for (int i = vector.length - 1; i >= 0; i--) {
-//            if (vector[i].equals("(")) {
-//                vector[i] = ")";
-//            } else if (vector[i].equals(")")) {
-//                vector[i] = "(";
-//            } else if (vector[i].equals("¬")) {
-//                respuesta += vector[i + 2];
-//                respuesta += vector[i + 4];
-//                respuesta += vector[i + 3];
-//                respuesta += vector[i + 2];
-//                respuesta += vector[i + 1];
-//                respuesta += vector[i];
-//                i -= 4;
-//                System.out.println("2");
-//                if (!flag) {
-//                    String c = vector[i];
-//                    System.out.println(c);
-//
-//                    vector[i] = vector[i + 2];
-//                    System.out.println(vector[i]);
-//
-//                    vector[i + 2] = c;
-//                    System.out.println(vector[i + 2]);
-//                    flag = true;
-//                }
-//            }
-            respuesta += vector[i];
-        }
-        return respuesta;
     }
 
     public String getOperacionResuelta() {

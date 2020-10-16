@@ -211,8 +211,8 @@ public class PnCentralConjuntos extends JPanel {
         pnAdminConjunto.getBtnPrincipal().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Conjunto temp = new Conjunto(conjuntos.getNombreRecomendado(), new ArrayList(), conjuntos.getColorRecomendado());
-                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Agregar un nuevo conjunto", temp);
+                Conjunto temp = new Conjunto(conjuntos.getNombreRecomendado(), new ArrayList(), PatronDisenho.getColorAleatorio());
+                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Agregar un nuevo conjunto", temp, true);
                 vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         Conjunto conjunto = vnConjunto.getConjuntoTemporal();
@@ -300,7 +300,7 @@ public class PnCentralConjuntos extends JPanel {
                         }
                     }
                     conjuntoEditar = conjuntos.getConjuntos().get(iteradorConjunto);
-                    vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Agregar un nuevo conjunto", conjuntoEditar);
+                    vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Agregar un nuevo conjunto", conjuntoEditar, true);
                     vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -29,10 +29,10 @@ public class Boton extends JButton {
     public static final int ICONO = 2;
     public static final int TEXTO_ICONO = 3;
 
-    private final Color PRIMARIO;
-    private final Color FOCO;
-    private final Color HOVER;
-    private final Color CLICK;
+    private Color PRIMARIO;
+    private Color FOCO;
+    private Color HOVER;
+    private Color CLICK;
 
     private final int TAMANHO;
 
@@ -45,7 +45,7 @@ public class Boton extends JButton {
 
     private boolean activoSiempre;
 
-    JLabel lbTexto;
+    private JLabel lbTexto;
     JLabel lbIcono;
     private int indice;
 
@@ -90,8 +90,9 @@ public class Boton extends JButton {
         posiciontextoIcono(textoIcono, texto, ruta);
         posicionFoco(foco);
 
-        this.add(java.awt.BorderLayout.CENTER, pnFondo);
         pnFondo.add(java.awt.BorderLayout.CENTER, pnDerecha);
+        this.add(java.awt.BorderLayout.CENTER, pnFondo);
+
     }
 
     private void posicionFoco(int foco) {
@@ -154,7 +155,7 @@ public class Boton extends JButton {
         this.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                pnOrilla.setVisible(true);
+                getPnOrilla().setVisible(true);
                 pnDerecha.setBackground(HOVER);
                 pnDerecha.updateUI();
             }
@@ -162,7 +163,7 @@ public class Boton extends JButton {
             @Override
             public void focusLost(FocusEvent fe) {
                 if (!activoSiempre) {
-                    pnOrilla.setVisible(false);
+                    getPnOrilla().setVisible(false);
                     pnDerecha.setBackground(PRIMARIO);
                 }
                 pnDerecha.updateUI();
@@ -215,5 +216,45 @@ public class Boton extends JButton {
 
     public void setIndice(int indice) {
         this.indice = indice;
+    }
+
+    public void setPRIMARIO(Color PRIMARIO) {
+        this.PRIMARIO = PRIMARIO;
+    }
+
+    public void setFOCO(Color FOCO) {
+        this.FOCO = FOCO;
+    }
+
+    public void setHOVER(Color HOVER) {
+        this.HOVER = HOVER;
+    }
+
+    public void setCLICK(Color CLICK) {
+        this.CLICK = CLICK;
+    }
+
+    public void setFUENTE(Font FUENTE) {
+        this.FUENTE = FUENTE;
+    }
+
+    public void setCOLOR_FUENTE(Color COLOR_FUENTE) {
+        this.COLOR_FUENTE = COLOR_FUENTE;
+    }
+
+    public JPanel getPnOrilla() {
+        return pnOrilla;
+    }
+
+    public JLabel getLbTexto() {
+        return lbTexto;
+    }
+
+    public JPanel getPnFondo() {
+        return pnFondo;
+    }
+
+    public JPanel getPnDerecha() {
+        return pnDerecha;
     }
 }

@@ -1,5 +1,6 @@
 package Unipamplona.MDiscretas.mundo;
 
+import Unipamplona.MDiscretas.interfaz.PatronDisenho;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,9 +42,9 @@ public class Conjuntos {
                 c.add("b");
                 c.add("c");
 
-                conjuntos.add(new Conjunto("A", a, getColorRecomendado()));
-                conjuntos.add(new Conjunto("B", b, getColorRecomendado()));
-                conjuntos.add(new Conjunto("C", c, getColorRecomendado()));
+                conjuntos.add(new Conjunto("A", a, PatronDisenho.getColorAleatorio()));
+                conjuntos.add(new Conjunto("B", b, PatronDisenho.getColorAleatorio()));
+                conjuntos.add(new Conjunto("C", c, PatronDisenho.getColorAleatorio()));
                 break;
             case HISTORIAL:
                 ArrayList h = new ArrayList();
@@ -53,7 +54,7 @@ public class Conjuntos {
                 h.add("x");
                 h.add("y");
                 h.add("z");
-                conjuntos.add(new Conjunto("( A Uni B ) Ints ( Compl ( C ) )", h, getColorRecomendado()));
+                conjuntos.add(new Conjunto("( A Uni B ) Ints ( Compl ( C ) )", h, PatronDisenho.getColorAleatorio()));
                 break;
         }
 
@@ -83,14 +84,6 @@ public class Conjuntos {
             c++;
         }
         return Character.toString(c);
-    }
-
-    public Color getColorRecomendado() {
-        Random random = new Random(); 
-        int red = random.nextInt(256);
-        int green = random.nextInt(256);
-        int blue = random.nextInt(256);
-        return new Color(red, green, blue);
     }
 
     public void addConjunto(Conjunto conjunto) {

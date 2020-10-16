@@ -4,10 +4,10 @@
  */
 package Unipamplona.MDiscretas.interfaz;
 
-import static Unipamplona.MDiscretas.interfaz.InterfazMain.alto;
 import static Unipamplona.MDiscretas.interfaz.InterfazMain.ancho;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-import java.awt.Dimension;
 
 /**
  *
@@ -15,6 +15,8 @@ import java.awt.Dimension;
  */
 public class PnLateral extends JPanel {
 
+    private final static String TITULO_ACERCA_DE = "Acerca de";
+    private final static String TITULO_TUTORIAL = "Tutorial";
     private JPanel pnSuperior;
     private JPanel pnInferior;
 
@@ -76,6 +78,9 @@ public class PnLateral extends JPanel {
                 PatronDisenho.MORADO_OSCURO, PatronDisenho.MORADO_CLARO, PatronDisenho.MORADO_HOVER,
                 PatronDisenho.MORADO_CLICK, PatronDisenho.BLANCO, 0);
 
+        agregarEventoBotonAbout();
+        agregarEventoBotonTutorial();
+
         pnSuperior.add(btnMenu);
         pnSuperior.add(btnConjuntos);
         pnSuperior.add(btnMatrices);
@@ -87,6 +92,27 @@ public class PnLateral extends JPanel {
          */
         this.add(pnSuperior, java.awt.BorderLayout.CENTER);
         this.add(pnInferior, java.awt.BorderLayout.SOUTH);
+    }
+
+    public void agregarEventoBotonAbout() {
+        btnAbout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VnAbout vn = new VnAbout(InterfazMain.getFrames()[0], true, TITULO_ACERCA_DE);
+                vn.setVisible(true);
+            }
+        });
+
+    }
+
+    public void agregarEventoBotonTutorial() {
+        btnTutorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VnTutorial vn = new VnTutorial(InterfazMain.getFrames()[0], true, TITULO_TUTORIAL);
+                vn.setVisible(true);
+            }
+        });
     }
 
     public Boton getBtnMenu() {

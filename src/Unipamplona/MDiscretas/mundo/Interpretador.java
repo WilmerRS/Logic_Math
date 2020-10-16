@@ -34,7 +34,6 @@ public class Interpretador {
 
         transpilacion = "";
         for (int i = 0; i < arrayTemp.length; i++) {
-//            System.out.print(arrayTemp[i]  + "" );
             switch (arrayTemp[i]) {
                 case " ": // Espacio vacio
                     break;

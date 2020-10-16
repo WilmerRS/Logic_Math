@@ -76,6 +76,7 @@ public class InterfazMain extends javax.swing.JFrame {
         lateral.getBtnConjuntos().requestFocus();
 
         lateral.getBtnConjuntos().addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lateral.getBtnMatrices().setActivoSiempre(false);
                 lateral.getBtnMatrices().requestFocus(false);
@@ -91,6 +92,7 @@ public class InterfazMain extends javax.swing.JFrame {
         });
 
         lateral.getBtnMatrices().addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lateral.getBtnConjuntos().setActivoSiempre(false);
                 lateral.getBtnConjuntos().requestFocus(false);
