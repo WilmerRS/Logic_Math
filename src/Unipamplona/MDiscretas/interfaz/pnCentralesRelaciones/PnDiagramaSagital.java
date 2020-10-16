@@ -85,7 +85,7 @@ public class PnDiagramaSagital extends JPanel {
                 columna2 = (int) ((3 * g.getClipBounds().getWidth()) / 4);
 
                 int yInicial1 = 30;
-                g2d.drawString(nombreA, columna1, yInicial1);
+//                g2d.drawString(nombreA, columna1, yInicial1);
                 yInicial1 += 10;
                 for (int i = 0; i < conjuntoA.size(); i++) {
                     yInicial1 += 30;
@@ -93,7 +93,7 @@ public class PnDiagramaSagital extends JPanel {
                 }
 
                 int yInicial2 = 30;
-                g2d.drawString(nombreB, columna2, yInicial2);
+//                g2d.drawString(nombreB, columna2, yInicial2);
                 yInicial2 += 10;
                 for (int i = 0; i < conjuntoB.size(); i++) {
                     yInicial2 += 30;
@@ -120,7 +120,7 @@ public class PnDiagramaSagital extends JPanel {
                 columna3 = (int) ((3 * g.getClipBounds().getWidth()) / 4) + 45;
 
                 yInicial1 = 30;
-                g2d.drawString(nombreA, columna1, yInicial1);
+//                g2d.drawString(nombreA, columna1, yInicial1);
                 yInicial1 += 10;
                 for (int i = 0; i < conjuntoA.size(); i++) {
                     yInicial1 += 30;
@@ -128,7 +128,7 @@ public class PnDiagramaSagital extends JPanel {
                 }
 
                 yInicial2 = 30;
-                g2d.drawString(nombreB, columna2, yInicial2);
+//                g2d.drawString(nombreB, columna2, yInicial2);
                 yInicial2 += 10;
                 for (int i = 0; i < conjuntoB.size(); i++) {
                     yInicial2 += 30;
@@ -136,7 +136,7 @@ public class PnDiagramaSagital extends JPanel {
                 }
 
                 int yInicial3 = 30;
-                g2d.drawString(nombreC, columna3, yInicial3);
+//                g2d.drawString(nombreC, columna3, yInicial3);
                 yInicial3 += 10;
                 for (int i = 0; i < conjuntoC.size(); i++) {
                     yInicial3 += 30;
@@ -175,7 +175,6 @@ public class PnDiagramaSagital extends JPanel {
     }
 
     private int buscarPosicionElemento(String elemento, ArrayList<String> array) {
-
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i).equals(elemento)) {
                 return i;

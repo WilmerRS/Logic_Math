@@ -11,6 +11,7 @@ import Unipamplona.MDiscretas.interfaz.pnCentralesRelaciones.PnEntradaRelaciones
 import Unipamplona.MDiscretas.interfaz.pnCentralesRelaciones.PnMatrizEntrada;
 import Unipamplona.MDiscretas.interfaz.pnCentralesRelaciones.PnMatrizSalida;
 import Unipamplona.MDiscretas.mundo.Conjunto;
+import Unipamplona.MDiscretas.mundo.OperacionesRelaciones;
 import Unipamplona.MDiscretas.mundo.Relacion;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,6 +30,9 @@ import javax.swing.JTextField;
 public class PnCentralRelaciones extends JPanel {
 
     private final String TITULO_RELACIONES = "Relaciones";
+
+    private final String TIPO_RELACION = "RELACION";
+    private final String TIPO_COMPOSICION = "COMPOSICION";
 
     private VnConjunto vnConjunto;
     private VnRelacion vnRelacion;
@@ -53,10 +57,12 @@ public class PnCentralRelaciones extends JPanel {
     private Relacion relacionR;
     private Relacion relacionS;
 
+    private OperacionesRelaciones operRelaciones;
+
     public PnCentralRelaciones() {
         super();
         crearPanel();
-
+        operRelaciones = new OperacionesRelaciones();
     }
 
     private void crearPanel() {
@@ -93,14 +99,465 @@ public class PnCentralRelaciones extends JPanel {
         inicializarRelaciones();
 
         agregarEventosBorrar();
-        agregarEventoEditarConjunto();
+//        agregarEventoEditarConjunto();
         agregarEventoEditarRelacion();
 
         agregarEventoLimpiar();
         agregarEventoCrear();
         agregarEventosMatriz();
 
+        agregarEventoCalcular();
+
+        agregarEventoAxB();
+        agregarEventoRTrans();
+        agregarEventoSTrans();
+        agregarEventoRCompS();
+
+        agregarEventosS();
+        agregarEventosR();
+
         this.add(pnFondo, java.awt.BorderLayout.CENTER);
+    }
+
+    private void agregarEventosR() {
+        pnEntradaRelaciones.getBtnReflexivaR().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionR.getPares(), conjuntoA.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.reflexiva(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación reflexiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no reflexiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnMatrizSalida.setConjuntoA(conjuntoA.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoA.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para A.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+        pnEntradaRelaciones.getBtnSimetricaR().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionR.getPares(), conjuntoA.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.simetrica(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación simétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no simétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnMatrizSalida.setConjuntoA(conjuntoA.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoA.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para A.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+        pnEntradaRelaciones.getBtnAntiSimetricaR().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionR.getPares(), conjuntoA.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.antisimetrica(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación antisimétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no antisimétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setConjuntoA(conjuntoA.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoA.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para A.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+        pnEntradaRelaciones.getBtnTransitivaR().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionR.getPares(), conjuntoA.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.transitiva(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación transitiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no transitiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setConjuntoA(conjuntoA.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoA.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para A.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+    }
+
+    private void agregarEventosS() {
+        pnEntradaRelaciones.getBtnReflexivaS().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionS.getPares(), conjuntoB.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.reflexiva(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación reflexiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no reflexiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setConjuntoA(conjuntoB.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para B.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+        pnEntradaRelaciones.getBtnSimetricaS().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionS.getPares(), conjuntoB.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.simetrica(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación simétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no simétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setConjuntoA(conjuntoB.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para B.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+        pnEntradaRelaciones.getBtnAntiSimetricaS().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionS.getPares(), conjuntoB.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.antisimetrica(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación antisimétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no antisimétrica");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setConjuntoA(conjuntoB.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para B.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+        pnEntradaRelaciones.getBtnTransitivaS().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizA(relacionS.getPares(), conjuntoB.getElementos());
+
+                try {
+                    Object[] temp = operRelaciones.transitiva(matriz);
+                    matriz = (String[][]) temp[1];
+                    boolean reflexiva = (boolean) temp[0];
+                    if (reflexiva) {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación transitiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("  Relación no transitiva");
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    }
+
+                    pnMatrizSalida.setConjuntoA(conjuntoB.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                    pnMatrizSalida.setRelacion1(operRelaciones.composicionParejas((String[][]) temp[1]));
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(operRelaciones.composicionParejas(matriz)));
+
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La Relacion No es válida para B.\n", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+    }
+
+    private void agregarEventoRCompS() {
+        pnEntradaRelaciones.getBtnComposicion().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                ArrayList<String[]> t = operRelaciones.composiciones(relacionR.getPares(), relacionS.getPares());
+                String[][] matriz = operRelaciones.matrizx(t);
+                if (!pnMatrizSalida.matrizVacia(matriz)) {
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+
+                    pnMatrizSalida.setConjuntoA(conjuntoA.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                    pnMatrizSalida.setConjuntoC(conjuntoC.getElementos());
+                    pnMatrizSalida.setRelacion1(relacionR.getPares());
+                    pnMatrizSalida.setRelacion2(relacionS.getPares());
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_COMPOSICION);
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(t));
+                    pnEntradaRelaciones.getLbSalida().updateUI();
+
+                    if (matriz.length == matriz[0].length) {
+                        try {
+                            String res = operRelaciones.evaluarTodosLosTipos(matriz);
+                            pnEntradaRelaciones.getLbTipoRelacion().setText(res);
+                            pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                        } catch (Exception e) {
+                            pnMatrizSalida.restablecerMatriz();
+                            JOptionPane.showMessageDialog(null, "Relación no permitida para esta operación.\n", "Error en la entrada",
+                                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                        }
+
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("   La matriz resultante no es cuadrada.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La Relacion a evaluar está vacía.\n"
+                            + "Debe seleccionar las posiciones que desea activar.", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+    }
+
+    private void agregarEventoRTrans() {
+        pnEntradaRelaciones.getBtnInversaR().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String[][] matriz = operRelaciones.matrizx(relacionR.getPares());
+                matriz = operRelaciones.matrizTras(matriz);
+                ArrayList<String[]> rel = operRelaciones.composicionParejas(matriz);
+
+                if (!pnMatrizSalida.matrizVacia(matriz)) {
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+
+                    pnMatrizSalida.setConjuntoA(conjuntoB.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoA.getElementos());
+                    pnMatrizSalida.setRelacion1(rel);
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(rel));
+                    pnEntradaRelaciones.getLbSalida().updateUI();
+
+                    if (matriz.length == matriz[0].length) {
+                        try {
+                            String res = operRelaciones.evaluarTodosLosTipos(matriz);
+                            pnEntradaRelaciones.getLbTipoRelacion().setText(res);
+                            pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                        } catch (Exception e) {
+                            pnMatrizSalida.restablecerMatriz();
+                            JOptionPane.showMessageDialog(null, "Relación no permitida para esta operación.\n", "Error en la entrada",
+                                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                        }
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("   La matriz resultante no es cuadrada.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La Relacion a evaluar está vacía.\n"
+                            + "Debe seleccionar las posiciones que desea activar.", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+
+            }
+        });
+    }
+
+    private void agregarEventoSTrans() {
+        pnEntradaRelaciones.getBtnInversaS().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+//                try {
+                String[][] matriz = operRelaciones.matrizx(relacionS.getPares());
+                matriz = operRelaciones.matrizTras(matriz);
+                ArrayList<String[]> rel = operRelaciones.composicionParejas(matriz);
+                if (!pnMatrizSalida.matrizVacia(matriz)) {
+                    pnMatrizSalida.setMatrizSalida(matriz);
+                    pnMatrizSalida.actualizarMatriz();
+
+                    pnMatrizSalida.setConjuntoA(conjuntoC.getElementos());
+                    pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                    pnMatrizSalida.setRelacion1(rel);
+                    pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                    pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(rel));
+                    pnEntradaRelaciones.getLbSalida().updateUI();
+
+                    if (matriz.length == matriz[0].length) {
+                        String res = operRelaciones.evaluarTodosLosTipos(matriz);
+                        pnEntradaRelaciones.getLbTipoRelacion().setText(res);
+                        pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                    } else {
+                        pnEntradaRelaciones.getLbTipoRelacion().setText("   La matriz resultante no es cuadrada.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La Relacion a evaluar está vacía.\n"
+                            + "Debe seleccionar las posiciones que desea activar.", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+//                } catch (Exception e) {
+//                }
+
+            }
+        });
+    }
+
+    private void agregarEventoAxB() {
+        pnEntradaRelaciones.getBtnMultiplicacion().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    String[][] matriz = operRelaciones.matrizAB(conjuntoB.getElementos(), conjuntoA.getElementos());
+                    ArrayList<String[]> rel = operRelaciones.composicionParejas(matriz);
+                    if (!pnMatrizSalida.matrizVacia(matriz)) {
+                        pnMatrizSalida.setMatrizSalida(matriz);
+                        pnMatrizSalida.actualizarMatriz();
+
+                        pnMatrizSalida.setConjuntoA(conjuntoA.getElementos());
+                        pnMatrizSalida.setConjuntoB(conjuntoB.getElementos());
+                        pnMatrizSalida.setRelacion1(rel);
+                        pnMatrizSalida.crearDiagramaSagital(TIPO_RELACION);
+
+                        pnEntradaRelaciones.getLbSalida().setText(operRelaciones.getCadenaElementos(rel));
+                        pnEntradaRelaciones.getLbSalida().updateUI();
+
+                        if (matriz.length == matriz[0].length) {
+                            String res = operRelaciones.evaluarTodosLosTipos(matriz);
+                            pnEntradaRelaciones.getLbTipoRelacion().setText(res);
+                            pnEntradaRelaciones.getLbTipoRelacion().updateUI();
+                        } else {
+                            pnEntradaRelaciones.getLbTipoRelacion().setText("   La matriz resultante no es cuadrada.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La matriz resultado está vacía.\n"
+                                + "Debe rellenar los conjuntos primeramente.", "Error en la entrada",
+                                JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La matriz resultado está vacía.\n"
+                            + "Debe rellenar los conjuntos primeramente.", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
+    }
+
+    private void agregarEventoCalcular() {
+        pnMatrizEntrada.getBtnCalcular().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    String[][] matriz = pnMatrizEntrada.getMatriz();
+                    if (!pnMatrizEntrada.matrizVacia()) {
+                        String res = operRelaciones.evaluarTodosLosTipos(pnMatrizEntrada.getMatriz());
+                        pnMatrizEntrada.getLbSalida().setText(res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La matriz a evaluar está vacía.\n"
+                                + "Debe seleccionar las posiciones que desea activar.", "Error en la entrada",
+                                JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "La matriz a evaluar está vacía.\n"
+                            + "Debe seleccionar las posiciones que desea activar.", "Error en la entrada",
+                            JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+                }
+            }
+        });
     }
 
     private void agregarEventoCrear() {
@@ -316,59 +773,58 @@ public class PnCentralRelaciones extends JPanel {
 
     }
 
-    private void agregarEventoEditarConjunto() {
-        pnEntradaRelaciones.getPnConjuntoA().getBtnEditar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Editar conjunto", conjuntoA, false);
-                vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        Conjunto conjunto = vnConjunto.getConjuntoTemporal();
-                        conjuntoA = conjunto;
-                        actualizarPanel(CONJUNTO, conjuntoA.getNombre());
-                        vnConjunto.dispose();
-                    }
-                });
-                vnConjunto.setVisible(true);
-            }
-        });
-
-        pnEntradaRelaciones.getPnConjuntoB().getBtnEditar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Editar conjunto", conjuntoB, false);
-                vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        Conjunto conjunto = vnConjunto.getConjuntoTemporal();
-                        conjuntoB = conjunto;
-                        actualizarPanel(CONJUNTO, conjuntoB.getNombre());
-                        vnConjunto.dispose();
-                    }
-                });
-                vnConjunto.setVisible(true);
-            }
-        });
-
-        pnEntradaRelaciones.getPnConjuntoC().getBtnEditar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Editar conjunto", conjuntoC, false);
-                vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        Conjunto conjunto = vnConjunto.getConjuntoTemporal();
-                        conjuntoC = conjunto;
-                        actualizarPanel(CONJUNTO, conjuntoC.getNombre());
-                        vnConjunto.dispose();
-                    }
-                });
-                vnConjunto.setVisible(true);
-            }
-        });
-    }
-
+//    private void agregarEventoEditarConjunto() {
+//        pnEntradaRelaciones.getPnConjuntoA().getBtnEditar().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Editar conjunto", conjuntoA, false);
+//                vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
+//                    @Override
+//                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                        Conjunto conjunto = vnConjunto.getConjuntoTemporal();
+//                        conjuntoA = conjunto;
+//                        actualizarPanel(CONJUNTO, conjuntoA.getNombre());
+//                        vnConjunto.dispose();
+//                    }
+//                });
+//                vnConjunto.setVisible(true);
+//            }
+//        });
+//
+//        pnEntradaRelaciones.getPnConjuntoB().getBtnEditar().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Editar conjunto", conjuntoB, false);
+//                vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
+//                    @Override
+//                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                        Conjunto conjunto = vnConjunto.getConjuntoTemporal();
+//                        conjuntoB = conjunto;
+//                        actualizarPanel(CONJUNTO, conjuntoB.getNombre());
+//                        vnConjunto.dispose();
+//                    }
+//                });
+//                vnConjunto.setVisible(true);
+//            }
+//        });
+//
+//        pnEntradaRelaciones.getPnConjuntoC().getBtnEditar().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                vnConjunto = new VnConjunto(InterfazMain.getFrames()[0], true, "Editar conjunto", conjuntoC, false);
+//                vnConjunto.getBtnAceptar().addActionListener(new java.awt.event.ActionListener() {
+//                    @Override
+//                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                        Conjunto conjunto = vnConjunto.getConjuntoTemporal();
+//                        conjuntoC = conjunto;
+//                        actualizarPanel(CONJUNTO, conjuntoC.getNombre());
+//                        vnConjunto.dispose();
+//                    }
+//                });
+//                vnConjunto.setVisible(true);
+//            }
+//        });
+//    }
     private void agregarEventoEditarRelacion() {
         pnEntradaRelaciones.getPnRelacionR().getBtnEditar().addActionListener(new ActionListener() {
             @Override

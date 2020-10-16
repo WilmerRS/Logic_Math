@@ -203,6 +203,18 @@ public class PnMatrizEntrada extends JPanel {
         actualizarPanelMatriz();
     }
     
+    public boolean matrizVacia(){
+        int cont = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                if(matriz[i][j].equals("1")){
+                    cont++;
+                }
+            }
+        }
+        return cont == 0;
+    }
+    
     private void actualizarPanelMatriz() {
         pnMatriz.removeAll();
         pnMatriz.setLayout(new java.awt.GridLayout(matriz.length, matriz[0].length, 3, 3));
@@ -375,6 +387,10 @@ public class PnMatrizEntrada extends JPanel {
 
     public JTextField getTxtTamanho() {
         return txtTamanho;
+    }
+
+    public JLabel getLbSalida() {
+        return lbSalida;
     }
 
     

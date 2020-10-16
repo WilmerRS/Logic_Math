@@ -136,7 +136,7 @@ public class PnMatrizSalida extends JPanel {
         actualizarMatriz();
 
         elementosDefecto();
-        crearDiagramaSagital();
+        crearDiagramaSagital(TIPO_RELACION);
 
         this.add(lbTitulo, java.awt.BorderLayout.NORTH);
         this.add(pnFondo, java.awt.BorderLayout.CENTER);
@@ -196,7 +196,8 @@ public class PnMatrizSalida extends JPanel {
         return matrizSalida;
     }
 
-    private void actualizarMatriz() {
+    public void actualizarMatriz() {
+        pnMatriz.removeAll();
         pnMatriz.setLayout(new java.awt.GridLayout(matrizSalida.length, matrizSalida[0].length, 3, 3));
         int contador = 0;
         for (int i = 0; i < matrizSalida.length; i++) {
@@ -236,6 +237,27 @@ public class PnMatrizSalida extends JPanel {
         spMatriz.setViewportView(pnMatriz);
     }
 
+    public boolean matrizVacia(String[][] matriz) {
+        int cont = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                try {
+                    if (matriz[i][j].equals("1")) {
+                        cont++;
+                    }
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        }
+        return cont == 0;
+    }
+
+    public void restablecerMatriz(){
+        matrizSalida = crearMatrizInicial();
+        actualizarMatriz();
+    }
+    
     public String[][] getMatrizSalida() {
         return matrizSalida;
     }
@@ -244,11 +266,68 @@ public class PnMatrizSalida extends JPanel {
         this.matrizSalida = matrizSalida;
     }
 
-    private void crearDiagramaSagital() {
-        PnDiagramaSagital dmSagital = new PnDiagramaSagital(conjuntoA, conjuntoB, relacion1, "A", "B", TIPO_RELACION);
+    public void crearDiagramaSagital(String tipo) {
+        pnSagital.removeAll();
+        PnDiagramaSagital dmSagital = null;
+        switch (tipo) {
+            case TIPO_RELACION:
+                dmSagital = new PnDiagramaSagital(conjuntoA, conjuntoB, relacion1, "A", "B", TIPO_RELACION);
+                break;
+            case TIPO_COMPOSICION:
+                dmSagital = new PnDiagramaSagital(conjuntoA, conjuntoB, conjuntoC, relacion1, relacion2, "A", "B", "C", TIPO_COMPOSICION);
+                break;
+        }
 //        PnDiagramaSagital dmSagital = new PnDiagramaSagital(conjuntoA, conjuntoB, conjuntoC, relacion1, relacion2, "A", "B", "C", TIPO_COMPOSICION);
         pnSagital.add(dmSagital);
         pnSagital.updateUI();
+    }
+
+    public JPanel getPnMatriz() {
+        return pnMatriz;
+    }
+
+    public JPanel getPnSagital() {
+        return pnSagital;
+    }
+
+    public ArrayList<String> getConjuntoA() {
+        return conjuntoA;
+    }
+
+    public void setConjuntoA(ArrayList<String> conjuntoA) {
+        this.conjuntoA = conjuntoA;
+    }
+
+    public ArrayList<String> getConjuntoB() {
+        return conjuntoB;
+    }
+
+    public void setConjuntoB(ArrayList<String> conjuntoB) {
+        this.conjuntoB = conjuntoB;
+    }
+
+    public ArrayList<String> getConjuntoC() {
+        return conjuntoC;
+    }
+
+    public void setConjuntoC(ArrayList<String> conjuntoC) {
+        this.conjuntoC = conjuntoC;
+    }
+
+    public ArrayList<String[]> getRelacion1() {
+        return relacion1;
+    }
+
+    public void setRelacion1(ArrayList<String[]> relacion1) {
+        this.relacion1 = relacion1;
+    }
+
+    public ArrayList<String[]> getRelacion2() {
+        return relacion2;
+    }
+
+    public void setRelacion2(ArrayList<String[]> relacion2) {
+        this.relacion2 = relacion2;
     }
 
 }

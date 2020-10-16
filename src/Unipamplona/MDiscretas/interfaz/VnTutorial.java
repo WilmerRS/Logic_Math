@@ -66,9 +66,9 @@ public class VnTutorial extends javax.swing.JDialog {
         lbImagenRelaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbImagenRelaciones.setOpaque(true);
         lbImagenRelaciones.setBackground(PatronDisenho.BLANCO);
-        lbImagenRelaciones.setIcon(new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+        lbImagenRelaciones.setIcon(new ImageIcon("./data/Iconos/1x/tutorial_Relaciones_max.png"));
         if (ancho < 1500) {
-            lbImagenRelaciones.setIcon(new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+            lbImagenRelaciones.setIcon(new ImageIcon("./data/Iconos/1x/tutorial_Relaciones_min.png"));
         }
 
         lbImagenConjuntos = new JLabel();

@@ -37,7 +37,7 @@ public class PnEntradaRelaciones extends JPanel {
 
     private final String TITULO_SALIDA = "   Salida";
     private final String TITULO_TIPO_SALIDA = "   Tipo de relación";
-    private final String SALIDA_DEFECTO = "     T = { ( 1, 2 ), ( 2, 3 ), ( 3, 4 )";
+    private final String SALIDA_DEFECTO = "     T = { ( 1, 2 ), ( 2, 3 ), ( 3, 4 ) }";
     private final String TIPO_DEFECTO = "     " + RELACION_SIMETRICA;
 
     private JPanel pnSuperior;
@@ -308,9 +308,9 @@ public class PnEntradaRelaciones extends JPanel {
         pnConjuntosIndi.setBackground(PatronDisenho.GRIS_FONDO);
         pnConjuntosIndi.setLayout(new java.awt.GridLayout(0, 1, 2, 2));
 
-        pnConjuntoA = new PnConjunto(PatronDisenho.getColorAleatorio(), new Dimension((int) (ancho * 0.0416), 50), "A = { 1, 2 }", true, 0);
-        pnConjuntoB = new PnConjunto(PatronDisenho.getColorAleatorio(), new Dimension((int) (ancho * 0.0416), 50), "B = { a, b }", true, 1);
-        pnConjuntoC = new PnConjunto(PatronDisenho.getColorAleatorio(), new Dimension((int) (ancho * 0.0416), 50), "C = { x, y }", true, 2);
+        pnConjuntoA = new PnConjunto(PatronDisenho.getColorAleatorio(), new Dimension((int) (ancho * 0.0416), 50), "A = { 1, 2 }", false, 0);
+        pnConjuntoB = new PnConjunto(PatronDisenho.getColorAleatorio(), new Dimension((int) (ancho * 0.0416), 50), "B = { a, b }", false, 1);
+        pnConjuntoC = new PnConjunto(PatronDisenho.getColorAleatorio(), new Dimension((int) (ancho * 0.0416), 50), "C = { x, y }", false, 2);
 
         pnConjuntosIndi.add(pnConjuntoA);
         pnConjuntosIndi.add(pnConjuntoB);
@@ -440,13 +440,13 @@ public class PnEntradaRelaciones extends JPanel {
         btnRelaciones.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent evt) {
-                btnTipoRelacion.setActivoSiempre(false);
-                btnTipoRelacion.requestFocus(false);
-                btnRelaciones.setActivoSiempre(true);
-                btnRelaciones.requestFocus(true);
+                getBtnTipoRelacion().setActivoSiempre(false);
+                getBtnTipoRelacion().requestFocus(false);
+                getBtnRelaciones().setActivoSiempre(true);
+                getBtnRelaciones().requestFocus(true);
 
-                cambiarAColorGris(btnTipoRelacion);
-                cambiarAColorMorado(btnRelaciones);
+                cambiarAColorGris(getBtnTipoRelacion());
+                cambiarAColorMorado(getBtnRelaciones());
 
                 cambiarBotones(RELACIONES);
 
@@ -456,13 +456,13 @@ public class PnEntradaRelaciones extends JPanel {
         btnTipoRelacion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent evt) {
-                btnRelaciones.setActivoSiempre(false);
-                btnRelaciones.requestFocus(false);
-                btnTipoRelacion.setActivoSiempre(true);
-                btnTipoRelacion.requestFocus(true);
+                getBtnRelaciones().setActivoSiempre(false);
+                getBtnRelaciones().requestFocus(false);
+                getBtnTipoRelacion().setActivoSiempre(true);
+                getBtnTipoRelacion().requestFocus(true);
 
-                cambiarAColorGris(btnRelaciones);
-                cambiarAColorMorado(btnTipoRelacion);
+                cambiarAColorGris(getBtnRelaciones());
+                cambiarAColorMorado(getBtnTipoRelacion());
 
                 cambiarBotones(TIPO_RELACIONES);
             }
@@ -538,6 +538,78 @@ public class PnEntradaRelaciones extends JPanel {
 
     public PnConjunto getPnRelacionS() {
         return pnRelacionS;
+    }
+
+    public Boton getBtnRelaciones() {
+        return btnRelaciones;
+    }
+
+    public Boton getBtnTipoRelacion() {
+        return btnTipoRelacion;
+    }
+
+    public Boton getBtnMultiplicacion() {
+        return btnMultiplicacion;
+    }
+
+    public Boton getBtnInversaR() {
+        return btnInversaR;
+    }
+
+    public Boton getBtnInversaS() {
+        return btnInversaS;
+    }
+
+    public Boton getBtnComposicion() {
+        return btnComposicion;
+    }
+
+    public Boton getBtnReflexivaR() {
+        return btnReflexivaR;
+    }
+
+    public Boton getBtnSimetricaR() {
+        return btnSimetricaR;
+    }
+
+    public Boton getBtnAntiSimetricaR() {
+        return btnAnriSimetricaR;
+    }
+
+    public Boton getBtnTransitivaR() {
+        return btnTransitivaR;
+    }
+
+    public Boton getBtnReflexivaS() {
+        return btnReflexivaS;
+    }
+
+    public Boton getBtnSimetricaS() {
+        return btnSimetricaS;
+    }
+
+    public Boton getBtnAntiSimetricaS() {
+        return btnAnriSimetricaS;
+    }
+
+    public Boton getBtnTransitivaS() {
+        return btnTransitivaS;
+    }
+
+    public JLabel getLbSalida() {
+        return lbSalida;
+    }
+
+    public JLabel getLbTituloTipoRelacion() {
+        return lbTituloTipoRelacion;
+    }
+
+    public JLabel getLbTipoRelacion() {
+        return lbTipoRelacion;
+    }
+
+    public void setLbTipoRelacion(JLabel lbTipoRelacion) {
+        this.lbTipoRelacion = lbTipoRelacion;
     }
 
 }
