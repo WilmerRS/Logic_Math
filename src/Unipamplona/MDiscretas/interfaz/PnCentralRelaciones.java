@@ -714,36 +714,45 @@ public class PnCentralRelaciones extends JPanel {
         pnEntradaRelaciones.getPnConjuntoA().getBtnEliminar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar los elementos del conjunto?\n", "Eliminar elementos de conjunto",
-                        JOptionPane.OK_CANCEL_OPTION, 0, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
-                if (cancelar == 0) {
-                    conjuntoA.setElementos(new ArrayList());
-                    actualizarPanel(CONJUNTO, conjuntoA.getNombre());
-                }
+//                int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar los elementos del conjunto?\n", "Eliminar elementos de conjunto",
+//                        JOptionPane.OK_CANCEL_OPTION, 0, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+//                if (cancelar == 0) {
+//                    conjuntoA.setElementos(new ArrayList());
+//                    actualizarPanel(CONJUNTO, conjuntoA.getNombre());
+//                }
+                JOptionPane.showMessageDialog(null, "Botón desabilitado temporalmente.\n"
+                        + "Pronto estará en funcionalidad.", "Boton desabilidato",
+                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
             }
         });
 
         pnEntradaRelaciones.getPnConjuntoB().getBtnEliminar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar los elementos del conjunto?\n", "Eliminar elementos de conjunto",
-                        JOptionPane.OK_CANCEL_OPTION, 0, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
-                if (cancelar == 0) {
-                    conjuntoB.setElementos(new ArrayList());
-                    actualizarPanel(CONJUNTO, conjuntoB.getNombre());
-                }
+//                int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar los elementos del conjunto?\n", "Eliminar elementos de conjunto",
+//                        JOptionPane.OK_CANCEL_OPTION, 0, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+//                if (cancelar == 0) {
+//                    conjuntoB.setElementos(new ArrayList());
+//                    actualizarPanel(CONJUNTO, conjuntoB.getNombre());
+//                }
+                JOptionPane.showMessageDialog(null, "Botón desabilitado temporalmente.\n"
+                        + "Pronto estará en funcionalidad.", "Boton desabilidato",
+                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
             }
         });
 
         pnEntradaRelaciones.getPnConjuntoC().getBtnEliminar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar los elementos del conjunto?\n", "Eliminar elementos de conjunto",
-                        JOptionPane.OK_CANCEL_OPTION, 0, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
-                if (cancelar == 0) {
-                    conjuntoC.setElementos(new ArrayList());
-                    actualizarPanel(CONJUNTO, conjuntoC.getNombre());
-                }
+//                int cancelar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar los elementos del conjunto?\n", "Eliminar elementos de conjunto",
+//                        JOptionPane.OK_CANCEL_OPTION, 0, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
+//                if (cancelar == 0) {
+//                    conjuntoC.setElementos(new ArrayList());
+//                    actualizarPanel(CONJUNTO, conjuntoC.getNombre());
+//                }
+                JOptionPane.showMessageDialog(null, "Botón desabilitado temporalmente.\n"
+                        + "Pronto estará en funcionalidad.", "Boton desabilidato",
+                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./data/Iconos/1x/Icono-cabecera-50x50.png"));
             }
         });
 

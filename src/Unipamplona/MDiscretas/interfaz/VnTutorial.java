@@ -100,7 +100,6 @@ public class VnTutorial extends javax.swing.JDialog {
         this.add(this.pnCabecera, java.awt.BorderLayout.NORTH);
         this.add(this.pnFondo, java.awt.BorderLayout.CENTER);
         pack();
-
     }
 
     public void eventoAgregarImagen() {
