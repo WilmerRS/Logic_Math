@@ -1,1 +1,13 @@
 /dist/
+
+/nbproject
+
+/.idea
+/idea
+
+/*.form
+
+/out
+
+/.vscode
+/vscode
