@@ -39,5 +39,5 @@ learning and facilitating understanding of the topics related to sets and boolea
 The developers have contributed to this project:
 
 * Wilmer Rodríguez Sánchez - <a href="https://github.com/WilmerRS"> WilmerRS </a> 
-* Luis Alfredo Acosta - <a href="https://github.com/WilmerRS"> ALfredoA </a> 
+* Luis Alfredo Acosta - <a href="https://github.com/Luis-Alfre"> Luis-Alfre </a> 
 
