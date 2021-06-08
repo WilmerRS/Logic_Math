@@ -21,18 +21,18 @@ learning and facilitating understanding of the topics related to sets and boolea
 2. Clone this repository: `https://github.com/WilmerRS/Logic_Math.git`.
 3. Make sure the libraries have been loaded correctly.
 
-### 🐅 Run 
+   ### 🐅 Run 
 
-In `src/main/java/Unipamplona/MDiscretas/interfaz`, there is `InterfazMain.java`,
-main java file. To execute, compile and run this file.
+   In `src/main/java/Unipamplona/MDiscretas/interfaz`, there is `InterfazMain.java`,
+   main java file. To execute, compile and run this file.
 
-### 🐣 Examples of use
+   ### 🐣 Examples of use
 
-Below is an example of using Logic Math functions:
+   Below is an example of using Logic Math functions:
 
-#### 🦀 Sets
+      #### 🦀 Sets
 
-#### 🐟 Relations
+      #### 🐟 Relations
 
 ## 🖋️ Authors
 
