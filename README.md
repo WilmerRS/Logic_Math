@@ -3,7 +3,7 @@
     <img src="https://github.com/WilmerRS/Logic_Math/blob/master/src/main/java/resources/data/Iconos/1x/Icono-cabecera-50x50.png" />
   </a>
 </div>
-
+ 
 <h1 style="margin-top:10px:" align="center"> 🚀
   <strong> Logic Math</strong> 🎯 
 </h1>
