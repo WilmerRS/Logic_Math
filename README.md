@@ -15,6 +15,21 @@ learning and facilitating understanding of the topics related to sets and boolea
 
 ## 📷 Aplicattions screenshots 
 
+### 🦀 Sets
+<div align="center">
+  <img src="https://raw.githubusercontent.com/WilmerRS/Logic_Math/master/src/main/java/resources/data/Iconos/1x/Frame%2091.png" width="1000"/>
+</div>
+
+### 🐟 Relations
+<div align="center">
+  <img src="https://raw.githubusercontent.com/WilmerRS/Logic_Math/master/src/main/java/resources/data/Iconos/1x/Frame%2090.png" width="1000"/>
+</div>
+
+### 🐞 Tutorial
+<div align="center">
+    <img src="https://raw.githubusercontent.com/WilmerRS/Logic_Math/master/src/main/java/resources/data/Iconos/1x/Frame%2089.png" width="1000"/>
+</div>
+
 ## 🐋 To get started
 
 1. Install and configure Java 8 or later and JVM.
@@ -25,14 +40,6 @@ learning and facilitating understanding of the topics related to sets and boolea
 
    In `src/main/java/Unipamplona/MDiscretas/interfaz`, there is `InterfazMain.java`,
    main java file. To execute, compile and run this file.
-
-   ### 🐣 Examples of use
-
-   Below is an example of using Logic Math functions:
-
-      #### 🦀 Sets
-
-      #### 🐟 Relations
 
 ## 🖋️ Authors
 
